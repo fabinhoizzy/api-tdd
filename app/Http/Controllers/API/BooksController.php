@@ -21,6 +21,29 @@ class BooksController extends Controller
     {
         $book = $this->book->find($id);
         return response()->json($book);
+    }
+    public function store(Request $request)
+    {
+        $book = $this->book->create($request->all());
 
+        return response()->json($book, 201);
+    }
+
+    public function update($id, Request $request)
+    {
+        $book = $this->book->find($id);
+
+        $book->update($request->all());
+
+        return response()->json($book);
+    }
+
+    public function destroy($id)
+    {
+        $book = $this->book->find($id);
+
+        $book->delete();
+
+        return response([], 204);
     }
 }
